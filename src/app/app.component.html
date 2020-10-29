@@ -1,4 +1,4 @@
-<div class="content" *ngIf="isShowList" [@inOutAnimation]>
+<div class="content" *ngIf="isShowList" [@opacityAnimation]>
 	<ng-container *ngTemplateOutlet="listTemplate; context: {data: data}"></ng-container>
 </div>
 <button (click)="onBtnClick()">{{ buttonName }}</button>
@@ -11,9 +11,9 @@
 				<i *ngIf="list.children.length; else delete" class="right-arrow">
           >
         </i>
-        <ng-template #delete>
-          <i class="delete-icon" (click)="onDelete(list.id)">x</i>
-        </ng-template>
+				<ng-template #delete>
+					<i class="delete-icon" (click)="onDelete(list.id)">x</i>
+				</ng-template>
 			</li>
 		</ng-container>
 	</ul>

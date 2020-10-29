@@ -3,12 +3,16 @@ import { trigger } from "@angular/animations";
 import { MOCK_DATA } from "./core/mock-data/mock-list-data";
 import { List } from "./core/interface/list.interface";
 import { SEQUENCE_FADE_IN_OUT } from "./core/animation/sequence-fade-in-out.animation";
+import { OPACITY_FADE_IN_OUT } from "./core/animation/opacity.animation";
 
 @Component({
   selector: "my-app",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"],
-  animations: [trigger("inOutAnimation", SEQUENCE_FADE_IN_OUT)]
+  styleUrls: ["./app.component.scss"],
+  animations: [
+    trigger("inOutAnimation", SEQUENCE_FADE_IN_OUT),
+    trigger("opacityAnimation", OPACITY_FADE_IN_OUT)
+  ]
 })
 export class AppComponent {
   // name = 'Angular ' + VERSION.major;
