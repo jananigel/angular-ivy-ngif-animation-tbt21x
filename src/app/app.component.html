@@ -1,0 +1,20 @@
+<div class="content" *ngIf="isShowList" [@inOutAnimation]>
+	<ng-container *ngTemplateOutlet="listTemplate; context: {data: data}"></ng-container>
+</div>
+<button (click)="onBtnClick()">{{ buttonName }}</button>
+<button (click)="onRestoreClick()">Restore</button>
+<ng-template #listTemplate let-data="data">
+	<ul>
+		<ng-container *ngFor="let list of data; trackby: trackById">
+			<li (click)="onListClick(list)" [@inOutAnimation]>
+				<span>{{ list.name }}</span>
+				<i *ngIf="list.children.length; else delete" class="right-arrow">
+          >
+        </i>
+        <ng-template #delete>
+          <i class="delete-icon" (click)="onDelete(list.id)">x</i>
+        </ng-template>
+			</li>
+		</ng-container>
+	</ul>
+</ng-template>
