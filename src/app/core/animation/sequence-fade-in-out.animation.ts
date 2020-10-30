@@ -7,11 +7,14 @@ export const SEQUENCE_FADE_IN_OUT = [
       opacity: "1",
       transform: "translateX(0)",
       "box-shadow": "0 1px 4px 0 rgba(0, 0, 0, 0.3)"
+      // background: 'red',
+      // overflow: 'hidden'
     }),
     sequence([
       animate(
         ".25s ease",
         style({
+          // height: '0',
           height: "*",
           opacity: ".2",
           transform: "translateX(20px)",
