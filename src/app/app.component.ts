@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  Input,
   VERSION,
   ViewChild
 } from "@angular/core";
@@ -10,6 +11,11 @@ import { MOCK_DATA } from "./core/mock-data/mock-list-data";
 import { List } from "./core/interface/list.interface";
 import { SEQUENCE_FADE_IN_OUT } from "./core/animation/sequence-fade-in-out.animation";
 import { OPACITY_FADE_IN_OUT } from "./core/animation/opacity.animation";
+
+enum CollapseMode {
+  Collapse = "collapse",
+  Swap = "swap"
+}
 
 @Component({
   selector: "my-app",
@@ -23,9 +29,12 @@ import { OPACITY_FADE_IN_OUT } from "./core/animation/opacity.animation";
 export class AppComponent implements AfterViewInit {
   // name = 'Angular ' + VERSION.major;
   isShowList = true;
-  buttonName = "Show List";
+  buttonName = "Hide List";
   data = JSON.parse(JSON.stringify(MOCK_DATA));
   isDisabledAnimation = false;
+  mode = CollapseMode;
+
+  @Input() collapseMode: CollapseMode = CollapseMode.Swap;
 
   @ViewChild("listEle") listElement: ElementRef;
 
@@ -36,7 +45,8 @@ export class AppComponent implements AfterViewInit {
     this.buttonName = this.isShowList ? "Hide List" : "Show List";
   };
 
-  onListClick = async (list: List) => {
+  onListClick = async (event: Event, list: List) => {
+    event.stopPropagation();
     if (list.children && list.children.length) {
       // next page
       await this.disabledAnimation();
@@ -48,7 +58,9 @@ export class AppComponent implements AfterViewInit {
     console.log(`list ${list.name} had been clicked`);
   };
 
-  onDelete = (id: string) => {
+  onDelete = (event: Event, id: string) => {
+    console.log("delete click");
+    event.stopPropagation();
     this.data = this.data.filter(data => data.id !== id);
   };
 

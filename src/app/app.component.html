@@ -6,14 +6,18 @@
 <ng-template #listTemplate let-data="data">
 	<ul #listEle>
 		<ng-container *ngFor="let list of data; trackBy: trackById">
-			<li (click)="onListClick(list)" [@inOutAnimation] [@.disabled]="isDisabledAnimation">
+			<li (click)="onListClick($event, list)" [@inOutAnimation] [@.disabled]="isDisabledAnimation">
 				<span>{{ list.name }}</span>
 				<i *ngIf="list.children.length; else delete" class="right-arrow">
           >
         </i>
 				<ng-template #delete>
-					<i class="delete-icon" (click)="onDelete(list.id)">x</i>
+					<i class="delete-icon" (click)="onDelete($event, list.id)">x</i>
 				</ng-template>
+
+				<ng-container *ngIf="collapseMode === mode.Collapse">
+					<ng-container *ngTemplateOutlet="listTemplate; context: {data: list.children}"></ng-container>
+				</ng-container>
 			</li>
 		</ng-container>
 	</ul>
