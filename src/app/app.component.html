@@ -4,9 +4,9 @@
 <button (click)="onBtnClick()">{{ buttonName }}</button>
 <button (click)="onRestoreClick()">Restore</button>
 <ng-template #listTemplate let-data="data">
-	<ul>
-		<ng-container *ngFor="let list of data; trackby: trackById">
-			<li (click)="onListClick(list)" [@inOutAnimation]>
+	<ul #listEle>
+		<ng-container *ngFor="let list of data; trackBy: trackById">
+			<li (click)="onListClick(list)" [@inOutAnimation] [@.disabled]="isDisabledAnimation">
 				<span>{{ list.name }}</span>
 				<i *ngIf="list.children.length; else delete" class="right-arrow">
           >
