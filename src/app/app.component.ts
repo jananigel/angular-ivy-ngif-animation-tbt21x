@@ -11,6 +11,8 @@ import { MOCK_DATA } from "./core/mock-data/mock-list-data";
 import { List } from "./core/interface/list.interface";
 import { SEQUENCE_FADE_IN_OUT } from "./core/animation/sequence-fade-in-out.animation";
 import { OPACITY_FADE_IN_OUT } from "./core/animation/opacity.animation";
+import { ExtractNestedData } from "./core/util/extract-nested-data.util";
+import { MOCK_BASE_LIST_DATA } from "./core/mock-data/mock-base-list-data";
 
 enum CollapseMode {
   Collapse = "collapse",
@@ -38,7 +40,14 @@ export class AppComponent implements AfterViewInit {
 
   @ViewChild("listEle") listElement: ElementRef;
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    const baseListData = ExtractNestedData(
+      MOCK_BASE_LIST_DATA,
+      "show",
+      "children"
+    );
+    console.log("baseListData = ", baseListData);
+  }
 
   onBtnClick = () => {
     this.isShowList = !this.isShowList;
